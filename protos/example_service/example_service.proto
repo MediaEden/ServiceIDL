@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package examples_service;
+
+message Person {
+	string name = 1;
+	int32 id = 2;
+	bool has_ponycopter = 3;
+}
+
+service Greeter {
+	// Unary RPCs
+	rpc SayHello(HelloRequest) returns (HelloResponse) {}
+
+	// Server Streaming RPCs
+	rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse);
+
+	// Client Streaming RPCs
+	rpc LotsOfGreetings(stream HelloRequest) returns (stream HelloResponse);
+
+	// Bidirectional Streaming RPCs
+	rpc BidiHello(stream HelloRequest) returns (stream HelloResponse);
+}
+
+message HelloRequest {
+	string greeting = 1;
+}
+
+message HelloResponse {
+	string reply = 1;
+}
+
